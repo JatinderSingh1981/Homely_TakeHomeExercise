@@ -113,10 +113,11 @@ Please add this caching functionality, so that the following behavior occurs:
 
 ```
 Add comments here
-```
 - I have added the Response Cachine which caches the results for 30 seconds. 
 - If I had more time, I would also add In-Memory Cache to cache the data in memory to avoid calling the DB. 
 - On a production server where we can have more than 10k TPS, I would go with Redis Cache
+
+```
 ---
 
 ## `Task-03`: Add a new property shortPrice
