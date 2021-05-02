@@ -48,7 +48,7 @@ An example of the expected information in a comments section could be:
 
 ## `Task-01`: Create an API endpoint to return paged listings
 
-_Status: `Pending`_
+_Status: `Completed`_
 
 Create an API endpoint that returns paged listings from the sample DB, given the following (optional) filters:
 
@@ -82,6 +82,16 @@ The returned JSON should look like:
 
 ```
 Add comments here
+- If I had more time, I would keep the listings table in the database as the MaterializedView add some other fields like 
+- StateCode, StateId, CategoryTypeCode, CategoryTypeName, StatusTypeCode, StatusTypeName and created Non-ClusteredIndexes to speed up the search.
+- The transaction tables need to be kept seperate and the listings table would get updated by adding a message in the ServiceBus to achieve Eventual Consistency.
+- For now, I have just created Enumerations for CategoryType and StatusType. Depending upon the requirements and thinking that this project would grow, I would create seperate tables for them and as I mentioned I would create seperate transaction tables and seperate listing table
+
+- If I had time, I would add another project Infrastructure.API which will have the various Extensions methods to handle resiliency, circuit breaker policies etc
+- The project Infrastructure.API will basically have all the enhancements like moving the DI to Extension Methods.
+
+- I wasn't sure of the validation messages required for the optional parameters so I added the data annotations to the RequestObject which throw error if incorrect values are being passed.
+
 ```
 
 ---

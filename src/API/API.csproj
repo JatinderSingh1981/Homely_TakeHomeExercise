@@ -3,6 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
-
+  
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Business.API\Business.API.csproj" />
+    <ProjectReference Include="..\Common.API\Common.API.csproj" />
+    <ProjectReference Include="..\DBContext.API\DBContext.API.csproj" />
+    <ProjectReference Include="..\Mapper.API\Mapper.API.csproj" />
+    <ProjectReference Include="..\Respository.API\Repository.API.csproj" />
+    <ProjectReference Include="..\ViewModels.API\ViewModels.API.csproj" />
+  </ItemGroup>
 </Project>

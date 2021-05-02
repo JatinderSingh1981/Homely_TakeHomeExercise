@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DBEntities.API\DBEntities.API.csproj" />
+  
+    <ProjectReference Include="..\Models.API\Models.API.csproj" />
+    <ProjectReference Include="..\Respository.API\Repository.API.csproj" />
+   
+    <ProjectReference Include="..\ViewModels.API\ViewModels.API.csproj" />
+  
+  </ItemGroup>
+</Project>
