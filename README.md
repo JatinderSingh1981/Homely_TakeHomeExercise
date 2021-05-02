@@ -92,13 +92,14 @@ Add comments here
 
 - I wasn't sure of the validation messages required for the optional parameters so I added the data annotations to the RequestObject which throw error if incorrect values are being passed.
 
+- If I had more time, I would also add Swagger to test the APIs from the browser and provide some documentation.
 ```
 
 ---
 
 ## `Task-02`: Add caching by suburb
 
-_Status: `Pending`_
+_Status: `Partially Completed`_
 
 A common use case for listings is returning current listings of a given type in a suburb. Because of this, we would like some basic caching adding to avoid the trip to the DB.
 
@@ -113,7 +114,9 @@ Please add this caching functionality, so that the following behavior occurs:
 ```
 Add comments here
 ```
-
+- I have added the Response Cachine which caches the results for 30 seconds. 
+- If I had more time, I would also add In-Memory Cache to cache the data in memory to avoid calling the DB. 
+- On a production server where we can have more than 10k TPS, I would go with Redis Cache
 ---
 
 ## `Task-03`: Add a new property shortPrice

@@ -25,6 +25,7 @@ namespace API.Controllers
         [ProducesResponseType(typeof(PropertyListingResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(PropertyListingResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(PropertyListingResponse), (int)HttpStatusCode.NotFound)]
+        [ResponseCache(VaryByQueryKeys = new string[] { "suburb", "categoryType", "statusType", "skip", "take" }, Duration = 30)]
         public async Task<ActionResult<PropertyListingResponse>> GetListings([FromQuery] PropertyListingRequest request)
         {
             //Put Validation here (if required) and Send a Bad Request

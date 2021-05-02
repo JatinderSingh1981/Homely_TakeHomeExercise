@@ -27,6 +27,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+            services.AddResponseCaching();
             services.AddDbContext<DataContext>();
             services.Configure<AppSettings>(Configuration);
             
@@ -53,6 +54,8 @@ namespace API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {
