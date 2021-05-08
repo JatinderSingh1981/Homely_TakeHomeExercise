@@ -28,6 +28,10 @@ namespace Business.API
             PropertyListingResponse listingResponse,
             ICacheManager cache)
         {
+            if (logger == null || mapper == null || listingRepository == null || listingResponse == null || cache == null)
+            {
+                throw new ArgumentNullException("Please check the values being passed");
+            }
             _logger = logger;
             _mapper = mapper;
             _listingRepository = listingRepository;
@@ -62,7 +66,7 @@ namespace Business.API
                 _listingResponse = await GetListingFromDB(request);
 
                 //Set Listing in the cache only if there is some result in the DB, otherwise there is no use
-                if (_listingResponse.Items.Count() > 0)
+                if (_listingResponse != null && _listingResponse.Items != null && _listingResponse.Items.Count() > 0)
                     SetListingCache(_listingResponse, cacheKey);
             }
             catch (Exception ex)
@@ -109,10 +113,11 @@ namespace Business.API
             {
                 var listing = await _listingRepository.GetListing(request);
 
-                var total = await _listingRepository.GetListingTotal(request);
+                long total = 0;
 
                 if (listing != null && listing.Any())
                 {
+                    total = await _listingRepository.GetListingTotal(request);
                     var result = _mapper.Map<IEnumerable<PropertyListing>>(listing);
                     _listingResponse.Items = result;
                     _listingResponse.Total = total;

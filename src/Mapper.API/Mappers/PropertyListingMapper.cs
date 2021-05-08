@@ -11,7 +11,7 @@ namespace Mapper.API
     public class PropertyListingMapper : AutoMapper.Profile
     {
 
-        public static string MapAddress(Entity.PropertyListing listing)
+        private static string MapAddress(Entity.PropertyListing listing)
         {
             return $"{listing.StreetNumber} {listing.Street}, {listing.Suburb} {listing.State} {listing.PostCode}";
         }

@@ -82,6 +82,8 @@ The returned JSON should look like:
 
 ```
 Add comments here
+- One of the assumptions I made when starting this exercise was the use of '=' when getting data for Suburb and not to use 'like' clause
+
 - I am treating the listings table as the MaterializedView. Possible enhancements include adding fields like 
 - StateCode, StateId, CategoryTypeCode, CategoryTypeName, StatusTypeCode, StatusTypeName.
 
@@ -160,12 +162,33 @@ Add comments here
 
 ## `Task-04`: Tests
 
-_Status: `Pending`_
+_Status: `Completed`_
 
-It is expected that you write tests for important changes you made above on the previous tasks, if any test was relevant. As a last pass, please check any code, existing or new that would benefit from tests and write them. Explain below the benefits of the tests you wrote and why they are important.
+It is expected that you write tests for important changes you made above on the previous tasks, if any test was relevant. 
+As a last pass, please check any code, existing or new that would benefit from tests and write them. 
+Explain below the benefits of the tests you wrote and why they are important.
 
 ```
 Add comments here
+- A possible enhancement is to mock the actual data. 
+- Since the focus is more on completing the Test Exercise and logic, I am skipping the mocking of data for now.
+- If user changes data then ofcourse my test data will break. Thats why we need to mock the data.
+
+- Test 1 - Check what happens when no values are passed. Does it use default values and fetch the data?
+- Test 2 - Check what happens, if all the parameters (Suburb, CategoryType, StatusType) are being passed with the correct values. Does it fetch the data?
+- Test 3 - Check what happens if the parameters with incorrect values such as Suburb ="South" are passed.
+- Test 4 - Check if data is coming from cache when called within next 2 minutes.
+- Test 5 - Check what happens for Skip and Take Data Annotations
+
+- Other Unit Tests that I could write (considering the default values for Skip and Take)
+- Test 6 - Should find values if only valid Suburb and CategoryType are being passed
+- Test 7 - Should find values if only valid Suburb and StatusType are being passed
+- Test 8 - Should find values if only valid CategoryType and StatusType are being passed
+- Test 9 - Should find values if only valid Suburb is being passed
+- Test 10 - Should find values if only valid CategoryType is being passed
+- Test 11 - Should find values if only valid StatusType is being passed
+- Test 12 - Check if cache expires after 2 minutes or not.
+
 ```
 
 ---

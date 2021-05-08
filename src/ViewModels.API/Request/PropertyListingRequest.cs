@@ -14,10 +14,10 @@ namespace ViewModels.API
         public CategoryType? CategoryType { get; set; }
         public StatusType? StatusType { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Value must be greater than equal to 0")]
+        [Range(0, int.MaxValue, ErrorMessage = "Value must be greater than 0")]
         public int? Skip { get; set; } = 0;
 
-        [Range(5, int.MaxValue, ErrorMessage = "Value must be greater than equal to 5")]
+        [Range(5, 500, ErrorMessage = "Value must be between 0 and 500")]
         public int? Take { get; set; } = 10;
 
     }
