@@ -82,24 +82,22 @@ The returned JSON should look like:
 
 ```
 Add comments here
-- If I had more time, I would keep the listings table in the database as the MaterializedView add some other fields like 
-- StateCode, StateId, CategoryTypeCode, CategoryTypeName, StatusTypeCode, StatusTypeName and created Non-ClusteredIndexes to speed up the search.
-- The transaction tables need to be kept seperate and the listings table would get updated by adding a message in the ServiceBus to achieve Eventual Consistency.
-- For now, I have just created Enumerations for CategoryType and StatusType. Depending upon the requirements and thinking that this project would grow, I would create seperate tables for them and as I mentioned I would create seperate transaction tables and seperate listing table
+- I am treating the listings table as the MaterializedView. Possible enhancements include adding fields like 
+- StateCode, StateId, CategoryTypeCode, CategoryTypeName, StatusTypeCode, StatusTypeName.
 
-- If I had time, I would add another project Infrastructure.API which will have the various Extensions methods to handle resiliency, circuit breaker policies etc
-- The project Infrastructure.API will basically have all the enhancements like moving the DI to Extension Methods.
+- The transaction tables need to be seperate tables and the listings table would get updated by adding a message in the ServiceBus to achieve Eventual Consistency.
+- For now, I have just created Enumerations for CategoryType and StatusType. 
 
 - I wasn't sure of the validation messages required for the optional parameters so I added the data annotations to the RequestObject which throw error if incorrect values are being passed.
 
-- If I had more time, I would also add Swagger to test the APIs from the browser and provide some documentation.
+- 
 ```
 
 ---
 
 ## `Task-02`: Add caching by suburb
 
-_Status: `Partially Completed`_
+_Status: `Completed`_
 
 A common use case for listings is returning current listings of a given type in a suburb. Because of this, we would like some basic caching adding to avoid the trip to the DB.
 
@@ -113,10 +111,15 @@ Please add this caching functionality, so that the following behavior occurs:
 
 ```
 Add comments here
-- I have added the Response Cachine which caches the results for 30 seconds. 
-- If I had more time, I would also add In-Memory Cache to cache the data in memory to avoid calling the DB. 
+- I have added the Response Cache which caches the results for 30 seconds. 
+- Added the InMemory Cache Manager (Default to 120 seconds) on business layer to get data from cache instead of getting from DB every time
 - On a production server where we can have more than 10k TPS, I would go with Redis Cache
-
+- Generally, the caching is not added for the dynamic data and is only required for the data which is independent of user changes. 
+- The data being cached here is too dynamic - based on user parameters and values. 
+- Caching is expensive and should not be too dynamic like in this case. 
+- We can use background jobs to cache data (if Caching for such data is required)
+- Try to avoid external inputs as cache keys. Always set your keys in code. I have set the external inputs as cache keys which is not ideal
+- Added 1 column for development testing to check if the data is from Cache or DB
 ```
 ---
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net;
 using Business.API;
 using ViewModels.API;
+using System;
 
 namespace API.Controllers
 {
@@ -31,11 +32,18 @@ namespace API.Controllers
             //Put Validation here (if required) and Send a Bad Request
 
             //Create logs here
-            var result = await _listingBL.GetListing(request);
-            if (result.Items != null)
-                return Ok(result);
-            else
-                return NotFound("Some Error Occured, Please contact Admin");
+            try
+            {
+                var result = await _listingBL.GetListing(request);
+                if (result.Items != null)
+                    return Ok(result);
+                else
+                    return NotFound("Some Error Occured, Please contact Admin for more information");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
         }
 

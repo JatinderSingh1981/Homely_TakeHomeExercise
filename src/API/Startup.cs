@@ -10,7 +10,7 @@ using Mapper.API;
 using DBContext.API;
 using Microsoft.EntityFrameworkCore;
 using Repository.API;
-
+using Infrastructure.API;
 
 namespace API
 {
@@ -26,19 +26,13 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOptions();
-            services.AddResponseCaching();
-            services.AddDbContext<DataContext>();
-            services.Configure<AppSettings>(Configuration);
-            
-            services.AddControllers();
-            services.AddAutoMapper(typeof(PropertyListingMapper).Assembly);
+            services
+                .AddDbContext<DataContext>()
+                .AddAutoMapper(typeof(PropertyListingMapper).Assembly);
 
             #region DI
-            services.AddTransient<PropertyListingResponse>();
-
-            services.AddTransient<IPropertyListingBusiness, PropertyListingBusiness>();
-            services.AddTransient<IPropertyListingRepository, PropertyListingRepository>();
+            //Moved all the services to new extension methods
+            services.AddInfrastructure(Configuration);
             #endregion
         }
 
@@ -49,6 +43,16 @@ namespace API
             {
                 context.Database.Migrate();
                 app.UseDeveloperExceptionPage();
+
+                #region Add Swagger only in Development mode
+
+                app.UseSwagger();
+
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Take Home Exercise - API");
+                });
+                #endregion
             }
 
             app.UseRouting();

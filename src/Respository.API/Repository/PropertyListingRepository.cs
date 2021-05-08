@@ -32,13 +32,14 @@ namespace Repository.API
                 .Where(x => String.IsNullOrEmpty(request.Suburb) || x.Suburb == request.Suburb)
                 .Where(x => request.CategoryType == null || x.CategoryType == (int)request.CategoryType.Value)
                 .Where(x => request.StatusType == null || x.StatusType == (int)request.StatusType.Value)
+                .OrderBy(x => x.ListingId) //Default Ordering
                 .Skip(request.Skip.Value).Take(request.Take.Value).ToListAsync();
         }
 
         public async Task<long> GetListingTotal(PropertyListingRequest request)
         {
-            _logger.LogDebug("[GetListing] -> Getting Property list from DB");
-            
+            _logger.LogDebug("[GetListing] -> Getting Property list Count from DB");
+
             return await _context.PropertyListing
                 .Where(x => String.IsNullOrEmpty(request.Suburb) || x.Suburb == request.Suburb)
                 .Where(x => request.CategoryType == null || x.CategoryType == (int)request.CategoryType.Value)
