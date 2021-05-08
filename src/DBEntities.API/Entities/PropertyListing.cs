@@ -37,6 +37,9 @@ namespace Entities.API
         [Column(TypeName = "varchar(100)")]
         public string DisplayPrice { get; set; }
 
+        [Column(TypeName = "varchar(100)")]
+        public string ShortPrice { get; set; }
+
         [Column(TypeName = "nvarchar(max)")]
         public string Title { get; set; }
         

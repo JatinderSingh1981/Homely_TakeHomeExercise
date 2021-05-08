@@ -125,7 +125,7 @@ Add comments here
 
 ## `Task-03`: Add a new property shortPrice
 
-_Status: `Pending`_
+_Status: `Completed`_
 
 We would like a new prop added to the payload:
 ```
@@ -150,6 +150,10 @@ Bonus points for handling other scenarios (use your judgement as to what the val
 
 ```
 Add comments here
+- Added a UDF in SQL server - ufnGetShortPrice to get the Short Price. Added in GIT as well
+- Does not cover all the scenarios and has some flaws in getting the Short price but updates a lot of rows
+- Added 3 indexes - NonClusteredIndexes.sql (Added in GIT) to speed up the data retrieval. 
+- We can discuss later why I chose these 3 indexes
 ```
 
 ---
