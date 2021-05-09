@@ -92,14 +92,16 @@ namespace UnitTest.API
 
         }
 
-        //Check what happens when no values are passed. Does it use default values and fetch the data?
+        //Check what happens when no values are passed. 
+        //Does it use default values and fetch the data?
+        //It should fetch the rows equivalent to default rows
         [Fact]
         public async void Test1()
         {
             PropertyListingRequest propertyListingRequest = new PropertyListingRequest();
             var response = await _propertyListingBusiness.GetListing(propertyListingRequest);
 
-            Assert.True(response.Items.Count() > 0);
+            Assert.True(response.Items.Count() > 0 && response.Items.Count() == propertyListingRequest.Take.GetValueOrDefault());
         }
 
         //Check what happens, if all the parameters (Suburb, CategoryType, StatusType) are passed with the correct values. 
@@ -110,11 +112,12 @@ namespace UnitTest.API
 
             PropertyListingRequest propertyListingRequest = new PropertyListingRequest();
             propertyListingRequest.Suburb = "SouthBank";
-            propertyListingRequest.CategoryType = CategoryType.Residential;
+            propertyListingRequest.CategoryType = CategoryType.Rental;
             propertyListingRequest.StatusType = StatusType.Current;
+            propertyListingRequest.Take = 20;
             var response = await _propertyListingBusiness.GetListing(propertyListingRequest);
 
-            Assert.True(response.Items.Count() > 0);
+            Assert.True(response.Items.Count() > 0 && response.Items.Count() == propertyListingRequest.Take.GetValueOrDefault());
         }
 
         //Check what happens if the parameters with incorrect values such as Suburb ="South" are passed.
@@ -127,7 +130,7 @@ namespace UnitTest.API
         }
 
         //Check if data is coming from cache when called next time. 
-        //Constructor is getting called n number of times because of which MemoryCache is getting created n number of times
+        //Constructor is getting called n number of times because of which MemoryCache is getting created and reset every time
         //[Theory]
         //[ClassData(typeof(CacheTestData))]
         //public async void Test4(PropertyListingRequest propertyListingRequest, string expected)

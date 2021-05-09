@@ -172,7 +172,7 @@ Explain below the benefits of the tests you wrote and why they are important.
 Add comments here
 - A possible enhancement is to mock the actual data. 
 - Since the focus is more on completing the Test Exercise and logic, I am skipping the mocking of data for now.
-- If user changes data then ofcourse my test data will break. Thats why we need to mock the data.
+- If user changes data then ofcourse my test data might break. Thats why we need to mock the data.
 
 - Test 1 - Check what happens when no values are passed. Does it use default values and fetch the data?
 - Test 2 - Check what happens, if all the parameters (Suburb, CategoryType, StatusType) are being passed with the correct values. Does it fetch the data?
